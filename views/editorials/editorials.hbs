@@ -1,0 +1,60 @@
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Editorial page</h1>
+        <p class="lead text-muted">This page is to view and create Editorials.
+        </p>
+        <p>
+          <a href="save-editorials" class="btn btn-outline-primary my-2">Create
+            a new editorial</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {{#if hasEditorials}}
+          {{#each editorial as |editor|}}
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{editor.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{editor.id}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{editor.phone}}</li>
+                <li class="list-group-item">{{editor.country}}</li>
+              </ul>
+              <div class="card-body">
+                <a
+                  href="/edit-editorials/{{editor.id}}?edit=true"
+                  class="btn btn-outline-warning"
+                >Update</a>
+
+                <form
+                  id="form-delete"
+                  class="formButtons"
+                  action="/delete-editorials"
+                  method="post"
+                >
+                  <input
+                    type="hidden"
+                    name="editorialId"
+                    value="{{editor.id}}"
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-outline-danger delete-editorials"
+                  >Delete</button>
+                </form>
+              </div>
+            </div>
+          {{/each}}
+        {{else}}
+          <h1>No hay editoriales creados</h1>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</main>

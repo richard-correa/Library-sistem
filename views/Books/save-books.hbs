@@ -1,0 +1,76 @@
+<main>
+  {{#if hasAuthors}}
+  {{#if hasEditorials}}
+<form id="form-container" method="post" action="{{#if editMode }}/edit-books{{else}}/save-books{{/if}}">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <a href="/books" class="btn btn-outline-success">Back to home</a><br><br>
+               <div class="card shadow">
+                   <div class="card-header text-white bg-dark"><h3 class="text-center">{{#if editMode}}Update book{{else}}Add new book{{/if}}</h3></div>
+                   <div class="card-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="Name"name="name"value="{{#if editMode}}{{book.name}}{{/if}}">
+                      </div>
+                      <div class="mb-3">
+                        <label for="year" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="Year"name="year"value="{{#if editMode}}{{book.year}}{{/if}}">
+                      </div>
+                      <div class="mb-3">
+                        <label for="text" class="form-label">publisher name</label>
+                        <select class="form-select"id="PublisherName"name="publisherName" aria-label="Default select example">
+                         <option {{#if editMode}}{{else}} selected{{/if}}>Selecciona una opcion</option>
+                            {{#each editorials as |editorial|}}
+                            {{#if (equalValue editorial.id ../book.editorialId )}}
+                            <option selected value="{{editorial.id}}">{{editorial.name}}</option>
+                            {{else}}
+                             <option value="{{editorial.id}}">{{editorial.name}}</option>
+                            {{/if}}
+                            {{/each}}
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="text" class="form-label">publisher's country</label>
+                        <select class="form-select"id="PublisherCountry"name="publisherCountry" aria-label="Default select example">
+                         <option {{#if editMode}}{{else}} selected{{/if}}>Selecciona una opcion</option>
+                            {{#each editorials as |editorial|}}
+                            {{#if (equalValue editorial.id ../book.editorialId )}}
+                            <option selected value="{{editorial.id}}">{{editorial.country}}</option>
+                            {{else}}
+                            <option value="{{editorial.id}}">{{editorial.country}}</option>
+                            {{/if}}
+                            {{/each}}
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="text" class="form-label">the author's name</label>
+                        <select class="form-select" id="Author-name"name="authorName" aria-label="Default select example">
+                         <option {{#if editMode}}{{else}} selected{{/if}}>Selecciona una opcion</option>
+                            {{#each authors as |author|}}
+                            {{#if (equalValue author.id ../book.authorId )}}
+                            <option selected value="{{author.id}}">{{author.name}}</option>
+                            {{else}}
+                            <option  value="{{author.id}}">{{author.name}}</option>
+                            {{/if}}
+                            {{/each}}
+                        </select>
+                      </div>
+                      {{#if editMode}}
+                      <input type="hidden"name="BookId"value="{{book.id}}"
+                      {{/if}}<br>
+                      <ul class="text-center">
+                        <button type="submit" class="btn btn-outline-primary">{{#if editMode}}Update{{else}}create{{/if}}</button>
+                      </ul>
+               </div>
+      </form>
+      {{else}}
+      <h1>No hay editoriales creados</h1>
+      <a class="btn btn-outline-primary"href="/editorials">Crear Editoriales</a>
+      {{/if}}
+      {{else}}
+      <h1>No hay autores creados</h1>
+      <a class="btn btn-outline-primary"href="/">Crear autores</a>
+      {{/if}}
+      
+</main>

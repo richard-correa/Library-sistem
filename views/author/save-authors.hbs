@@ -1,0 +1,27 @@
+<main>
+<form id="form-container" method="post" action="{{#if editMode }}/edit-authors{{else}}/save-authors{{/if}}">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <a href="/" class="btn btn-outline-success">Back to home</a><br><br>
+               <div class="card shadow">
+                   <div class="card-header text-white bg-dark"><h3 class="text-center">{{#if editMode}}Update author{{else}}Add new author{{/if}}</h3></div>
+                   <div class="card-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="Name"name="name"value="{{#if editMode}}{{author.name}}{{/if}}">
+                      </div>
+                      <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="Email"name="email"value="{{#if editMode}}{{author.email}}{{/if}}">
+                      </div>
+                      
+                      {{#if editMode}}
+                      <input type="hidden"name="authorId"value="{{author.id}}"
+                      {{/if}}<br>
+                      <ul class="text-center">
+                        <button type="submit" class="btn btn-outline-primary">{{#if editMode}}Update{{else}}create{{/if}}</button>
+                      </ul>
+               </div>
+      </form>
+</main>

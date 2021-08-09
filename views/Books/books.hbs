@@ -1,0 +1,75 @@
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">book page</h1>
+        <p class="lead text-muted">This page is to view and create books.
+        </p>
+        <p>
+          <a href="save-books" class="btn btn-outline-primary my-2">Create a new
+            book</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {{#if hasBooks}}
+          {{#each books as |book|}}
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{book.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{book.id}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <h6 class="card-subtitle mb-2 text-dark text-center">Nombre del
+                  autor:
+                </h6>
+                <li
+                  class="list-group-item text-dark text-center"
+                >{{book.author.dataValues.name}}</li>
+                <h6 class="card-subtitle mb-2 text-dark text-center">Nombre del
+                  editorial:
+                </h6>
+                <li
+                  class="list-group-item text-center"
+                >{{book.editorial.dataValues.name}}</li>
+                <h6 class="card-subtitle mb-2 text-dark text-center">Pais:
+                </h6>
+                <li
+                  class="list-group-item text-dark text-center"
+                >{{book.editorial.dataValues.country}}</li>
+                <h6 class="card-subtitle mb-2 text-dark text-center">año de
+                  publicacion:
+                </h6>
+                <li class="list-group-item text-center">{{book.year}}</li>
+              </ul>
+              <div class="card-body">
+                <a
+                  href="/edit-books/{{book.id}}?edit=true"
+                  class="btn btn-outline-warning"
+                >Update</a>
+
+                <form
+                  id="form-delete-book"
+                  class="formButtons"
+                  action="/delete-books"
+                  method="post"
+                >
+                  <input type="hidden" name="bookId" value="{{book.id}}" />
+                  <button
+                    type="submit"
+                    class="btn btn-outline-danger delete-book"
+                  >Delete</button>
+                </form>
+              </div>
+            </div>
+          {{/each}}
+        {{else}}
+          <h1>No hay libros creados</h1>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</main>

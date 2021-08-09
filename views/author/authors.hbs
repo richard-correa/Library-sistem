@@ -1,0 +1,55 @@
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Authors page</h1>
+        <p class="lead text-muted">This page is to view and create authors. </p>
+        <p>
+          <a href="save-authors" class="btn btn-outline-primary my-2">Create a
+            new author</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        {{#if hasAuthors}}
+
+          {{#each authors as |author|}}
+
+            <div class="card col-md-3">
+              <div class="card-body">
+                <h5 class="card-title">{{author.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{author.id}}</h6>
+                <p class="card-text">email: {{author.email}}</p>
+                <a
+                  href="/edit-authors/{{author.id}}?edit=true"
+                  class="btn btn-outline-warning"
+                >Update</a>
+
+                <form
+                  id="form-delete-authors"
+                  class="formButtons"
+                  action="/delete-authors"
+                  method="post"
+                >
+                  <input type="hidden" name="authorId" value="{{author.id}}" />
+                  <button
+                    type="submit"
+                    class="btn btn-outline-danger delete-authors"
+                  >Delete</button>
+                </form>
+              </div>
+            </div>
+
+          {{/each}}
+        {{else}}
+          <h1>No hay autores creados</h1>
+        {{/if}}
+
+      </div>
+    </div>
+  </div>
+</main>
